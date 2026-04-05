@@ -8,8 +8,7 @@ Kho lưu trữ này chứa mã nguồn phục vụ cho việc tiền xử lý, p
 
 1. [Mô tả dự án (Description & Motivation)](#1-mô-tả-dự-án)
 2. [Tập dữ liệu (Dataset)](#2-tập-dữ-liệu)
-3. [Mô tả tệp tin (File Descriptions)](#3-mô-tả-các-tệp-tin)
-4. [Khởi động nhanh (Quick Start với Checkpoint)](#4-khởi-động-nhanh-với-checkpoint)
+3. [Khởi động nhanh (Quick Start với Checkpoint)](#4-khởi-động-nhanh-với-checkpoint)
 
 ---
 
