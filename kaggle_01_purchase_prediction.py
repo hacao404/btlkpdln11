@@ -18,7 +18,7 @@ from sklearn.preprocessing import OrdinalEncoder
 plt.style.use("seaborn-v0_8-darkgrid")
 sns.set_palette("husl")
 plt.rcParams.update({"figure.dpi": 110, "font.size": 11, "axes.titlesize": 13})
-print("✅ Imports OK")
+print(" Imports OK")
 
 # ── Cell 2: Paths & Files ─────────────────────────────────────
 OUT       = "/kaggle/working/output"
@@ -38,9 +38,9 @@ if not csv_files:
     raise FileNotFoundError("No CSV found!")
 
 total_gb = sum(os.path.getsize(f)/1024**3 for f in csv_files)
-print(f"📂 {len(csv_files)} files ({total_gb:.1f} GB)")
+print(f" {len(csv_files)} files ({total_gb:.1f} GB)")
 for f in csv_files:
-    print(f"   ✅ {os.path.basename(f):40s}  {os.path.getsize(f)/1024**3:.2f} GB")
+    print(f"    {os.path.basename(f):40s}  {os.path.getsize(f)/1024**3:.2f} GB")
 
 # ── Cell 3: Tạo LazyFrame ─────────────────────────────────────
 SCHEMA = {"product_id": pl.Int64, "category_id": pl.Int64,
@@ -72,13 +72,13 @@ raw = (
     ])
 )
 
-print("✅ LazyFrame ready")
+print(" LazyFrame ready")
 
 # ── Cell 4: Session features — Hash Partition Streaming ────────
 # File-by-file vẫn OOM vì Nov 2019 có ~68M rows → group_by hash table quá lớn
 # Fix: hash partition sessions → mỗi pass chỉ giữ 25% sessions trong RAM
-#   Pass 1: sessions hash%4==0 → ~12.5M sessions → hash table ~1 GB ✅
-#   Pass 2: sessions hash%4==1 → ~12.5M sessions → hash table ~1 GB ✅
+#   Pass 1: sessions hash%4==0 → ~12.5M sessions → hash table ~1 GB 
+#   Pass 2: sessions hash%4==1 → ~12.5M sessions → hash table ~1 GB 
 #   ...
 #   Scan data 4 lần nhưng mỗi lần streaming + nhỏ → không OOM
 CKPT_SESSIONS = f"{DATA_DIR}/sessions.parquet"
@@ -88,7 +88,7 @@ if os.path.exists(CKPT_SESSIONS):
     print("  ⚡ Loading sessions from checkpoint...")
     t0 = time.time()
     sessions = pl.read_parquet(CKPT_SESSIONS)
-    print(f"✅ Sessions loaded: {len(sessions):,} rows ({time.time()-t0:.1f}s)")
+    print(f" Sessions loaded: {len(sessions):,} rows ({time.time()-t0:.1f}s)")
 else:
     import gc
     NEEDED = ["user_id", "user_session", "event_type", "product_id",
@@ -168,8 +168,8 @@ else:
         ])
     )
     sessions.write_parquet(CKPT_SESSIONS)
-    print(f"💾 Checkpoint saved! ({time.time()-t0:.0f}s total)")
-    print(f"✅ {len(sessions):,} sessions")
+    print(f" Checkpoint saved! ({time.time()-t0:.0f}s total)")
+    print(f" {len(sessions):,} sessions")
 
 print(f"   Purchases: {sessions['label'].sum():,} ({sessions['label'].mean()*100:.2f}%)")
 print(f"   RAM: ~{sessions.estimated_size('mb'):.0f} MB")
@@ -242,13 +242,13 @@ auc    = metrics.roc_auc_score(y_test, y_prob)
 f1     = metrics.f1_score(y_test, y_pred)
 
 print(f"\n{'='*50}")
-print(f"  📊 Purchase Prediction Results")
+print(f"   Purchase Prediction Results")
 print(f"{'='*50}")
 print(f"  {'Accuracy':<20}: {metrics.accuracy_score(y_test, y_pred):.4f}")
 print(f"  {'Precision':<20}: {metrics.precision_score(y_test, y_pred):.4f}")
 print(f"  {'Recall':<20}: {metrics.recall_score(y_test, y_pred):.4f}")
 print(f"  {'F1-Score':<20}: {f1:.4f}")
-print(f"  {'ROC-AUC ⭐':<20}: {auc:.4f}")
+print(f"  {'ROC-AUC ':<20}: {auc:.4f}")
 print(metrics.classification_report(y_test, y_pred,
       target_names=["No Purchase", "Purchase"], digits=4))
 
