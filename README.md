@@ -3,7 +3,7 @@
 Dự án phân tích dữ liệu hành vi người dùng trên nền tảng thương mại điện tử, sử dụng dataset **eCommerce behavior data from multi-category store**.
 Mục tiêu chính là xây dựng pipeline xử lý dữ liệu, phân tích hành vi người dùng, trích xuất đặc trưng và huấn luyện mô hình dự đoán khả năng mua hàng.
 
----
+
 
 ## 1. Tổng quan dự án
 
@@ -22,7 +22,7 @@ Dự án tập trung vào các bài toán chính:
 * Dự đoán khả năng một phiên truy cập có phát sinh mua hàng hay không.
 * Xây dựng pipeline gợi ý sản phẩm dựa trên lịch sử tương tác.
 
----
+
 
 
 ## 2. Pipeline xử lý
@@ -59,7 +59,7 @@ Các công việc chính:
 
 Đầu ra của bước này là dữ liệu đã được làm sạch và sẵn sàng cho phân tích.
 
----
+
 
 ### Bước 2: Exploratory Data Analysis
 
@@ -75,7 +75,7 @@ Các phân tích chính:
 
 Đầu ra của bước này là các bảng thống kê và biểu đồ giúp hiểu dữ liệu trước khi xây dựng mô hình.
 
----
+
 
 ### Bước 3: Feature Engineering
 
@@ -102,7 +102,7 @@ label = 0 nếu phiên không có hành vi purchase
 
 Đầu ra của bước này là bảng dữ liệu dạng session-level, trong đó mỗi dòng tương ứng với một phiên truy cập của người dùng.
 
----
+
 
 ### Bước 4: Model Training và Recommendation
 
@@ -125,7 +125,7 @@ Thứ hai là pipeline gợi ý sản phẩm:
 
 Đầu ra của bước này gồm model dự đoán mua hàng, kết quả đánh giá và pipeline gợi ý sản phẩm.
 
----
+
 
 ### Bước 5: Evaluation & Saved Results
 
@@ -146,31 +146,8 @@ Trong đó:
 * `output/data/`: lưu dữ liệu đã xử lý hoặc dữ liệu đặc trưng.
 
 
-## 3. Cấu trúc file
 
-```text
-btlkpdln11/
-├── README.md
-├── kaggle_01_purchase_prediction.py
-├── process_data.ipynb
-├── process_data_v2.ipynb
-├── process_data_v4.ipynb.ipynb
-└── recommendation_pipeline_v1.ipynb
-```
-
-Mô tả nhanh:
-
-| File                               | Mô tả                                       |
-| ---------------------------------- | ------------------------------------------- |
-| `process_data.ipynb`               | Notebook xử lý dữ liệu ban đầu              |
-| `process_data_v2.ipynb`            | Notebook làm sạch dữ liệu và tạo checkpoint |
-| `process_data_v4.ipynb.ipynb`      | Phiên bản xử lý dữ liệu nâng cấp |
-| `recommendation_pipeline_v1.ipynb` | Pipeline gợi ý sản phẩm                     |
-| `kaggle_01_purchase_prediction.py` | Script huấn luyện mô hình dự đoán mua hàng  |
-
----
-
-## 4. Quick Start
+## 3. Quick Start
 
 Clone repository:
 
@@ -204,28 +181,10 @@ Sau đó mở và chạy:
 process_data_v2.ipynb
 ```
 
-Chạy mô hình dự đoán mua hàng:
-
-```bash
-python kaggle_01_purchase_prediction.py
-```
-
 Chạy pipeline gợi ý sản phẩm bằng notebook:
 
 ```text
 recommendation_pipeline_v1.ipynb
 ```
 
-Sau khi chạy xong, kết quả có thể bao gồm:
 
-```text
-output/models/
-output/plots/
-output/data/
-```
-
-Trong đó:
-
-* `output/models/`: lưu mô hình đã huấn luyện.
-* `output/plots/`: lưu biểu đồ đánh giá.
-* `output/data/`: lưu dữ liệu đã xử lý hoặc dữ liệu tổng hợp.
